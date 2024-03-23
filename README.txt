@@ -37,7 +37,7 @@ Home page:
 Once the user is signed in the home page changes the background and welcomes the user either by username or first name if one. 
 The home page contains a navbar with the most important links of the app. The genre link extends on hover and shows all book genres (a django model). 
 This is achieved by a simple JavaScript. 
-Each genre leads to a page that contains all books associated with a particular genre.
+Each genre leads to a page that contains all books associated with this particular genre.
 The home page also picks up 3 random book instances every time when loaded. Below them there is a link to access the whole library.
 *** If there are no books added yet - no books are displayed. If there are less than three books in the DB - all existing books are shown.
 
