@@ -1,0 +1,45 @@
+{% extends "base_2.html" %}
+{% load static %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block navbar_items %}
+{% include 'navbar-items.html' %}
+{% endblock navbar_items %}
+
+{% block main_content %}
+
+{% if messages %}
+<div id="some-random-picks">
+  {% for message in messages %}
+  {% if message.tags %} {{ message }} {% endif %}
+  {% endfor %}
+</div>
+{% endif %}
+
+{% if not request.user.is_superuser %}
+<h1>Hello, {{ request.user.profile }}!</h1>
+{% else %}
+<h1>Hello, {{ request.user }}!</h1>
+{% endif %}
+
+{% if books %}
+<h2 id="some-random-picks">Some random picks for you today!</h2>
+<section class="book-items-container">
+  {% for book in random_books %}
+  {% include "book-card.html" %}
+  {% endfor %}
+</section>
+<div class="details-buttons">
+  <a href="{% url 'all books' %}?author={{author}}"><button>View All</button></a>
+</div>
+
+{% else %}
+
+<h1>No books yet!</h1>
+
+{% endif %}
+
+{% endblock main_content %}

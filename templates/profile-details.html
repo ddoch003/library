@@ -1,0 +1,49 @@
+{% extends "base_2.html" %}
+{% load static %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block navbar_items %}
+{% include "navbar-items.html" %}
+{% endblock navbar_items %}
+
+{% block main_content %}
+<section class="profile-card">
+    <div>
+        {% if not profile.profile_picture %}
+        <img src="{% static 'images/profile-circle-icon-2048x2048-cqe5466q.png' %}" alt="">
+        {% else %}
+        <img src="{{ profile.profile_picture }}" alt="">
+        {% endif %}
+    </div>
+    <div class="profile-card-info">
+        <div class="profile-card-info-paragraphs">
+            <p>First Name: {{ profile.first_name }}</p>
+            <p>Last Name: {{ profile.last_name }}</p>
+            <p>Email: {{ profile.user.email }}</p>
+            <p>Date Of Birth: {{ profile.user.date_of_birth }}</p>
+        </div>
+        {% if request.user.pk == profile.pk %}
+        <div class="profile-card-info-links">
+            <a href="{% url 'profile edit' profile_pk=request.user.pk %}">Edit</a>
+            <a href="{% url 'profile delete' profile_pk=request.user.pk %}">Delete</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% if profile.favorite_books.all %}
+<h1>Favorites</h1>
+
+<section class="book-items-container">
+    {% for book in profile.favorite_books.all %}
+        {% include "book-card.html" %}
+    {% endfor %}
+</section>
+{% else %}
+<h1>No favorites added yet</h1>
+{% endif %}
+
+{% endblock main_content %}

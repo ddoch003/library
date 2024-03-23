@@ -1,0 +1,25 @@
+{% extends "base_2.html" %}
+{% load static %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block navbar_items %}
+{% include "navbar-items.html" %}
+{% endblock navbar_items %}
+
+{% block main_content %}
+
+{% if not request.user.profile.first_name %}
+<h1>Are you sure you want to delete your profile, {{ request.user }}?</h1>
+{% else %}
+<h1>Are you sure you want to delete your profile, {{ request.user.profile.first_name }}?</h1>
+{% endif %}
+
+<form action="{% url 'profile delete' profile_pk=request.user.pk %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Delete profile</button>
+</form>
+
+{% endblock main_content %}

@@ -1,0 +1,24 @@
+{% extends "base_2.html" %}
+{% load static %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block navbar_items %}
+{% include "navbar-items.html" %}
+{% endblock navbar_items %}
+
+{% block main_content %}
+<h1>Are you sure you want to delete "{{ book.title }}"?</h1>
+
+<form action="{% url 'book delete' book_pk=book.pk %}" method="post">
+
+    {% csrf_token %}
+
+    <div class="details-buttons">
+        <button>Delete</button>
+    </div>
+
+</form>
+{% endblock main_content %}

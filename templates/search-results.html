@@ -1,0 +1,42 @@
+{% extends "base_2.html" %}
+{% load static %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block navbar_items %}
+{% include "navbar-items.html" %}
+{% endblock navbar_items %}
+
+{% block main_content %}
+
+<div class="form-container">
+    <h1>Search</h1>
+
+    <form action="{% url 'search' %}" method="get">
+
+        {{ form.as_p }}
+
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+{% if results %}
+<div class="search-result-container">
+    <ul>
+        {% for result in results %}
+        <li>
+            {% if result.first_name or result.last_name %}
+            <p>Author: <a href="{% url 'author details' author_pk=result.pk %}?author_name={{ result.full_name }}">{{ result.full_name }}</a></p>
+            {% elif result.title %}
+            <p>Book: <a href="{% url 'book details' book_pk=result.pk %}?book_title={{ result.title }}">{{ result.title }}</a></p>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+
+{% endblock main_content %}

@@ -1,0 +1,85 @@
+{% extends "base_2.html" %}
+{% load static %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block navbar_items %}
+{% include "navbar-items.html" %}
+{% endblock navbar_items %}
+
+{% block main_content %}
+<h1>Libraria 20 Blog</h1>
+
+{% if not object_list %}
+<h1>No posts yet</h1>
+{% endif %}
+
+<div class="details-buttons">
+    <a href="{% url 'blog add' %}"><button>Add a new post</button></a>
+</div>
+
+{% for post in object_list %}
+<div class="blog-post">
+    {% if not post.creator.is_superuser %}
+    <div class="blog-post-creator">
+        <a href="{% url 'profile details' profile_pk=post.creator.profile.pk %}">
+            <img src="{{ post.creator.profile.profile_picture }}" alt=""></a>
+        <a href="{% url 'profile details' profile_pk=post.creator.profile.pk %}">
+            <h3>{{ post.creator }}</h3>
+        </a>
+    </div>
+    {% endif %}
+    <h1>{{ post.title }}</h1>
+    <div class="published-by">
+        <p>Published on {{ post.added_on }}</p>
+    </div>
+    <div class="content">
+        <p id="blog-post-content">{{ post.text|safe }}</p>
+    </div>
+    {% if request.user.pk == post.creator.pk %}
+        <a href="{% url 'blog edit' post_pk=post.pk %}"><button>Edit Post</button></a>
+        <a href="{% url 'blog delete' post_pk=post.pk %}"><button>Delete Post</button></a>
+    {% elif request.user.is_superuser or request.user.is_staff %}
+        <a href="{% url 'blog delete' post_pk=post.pk %}"><button>Delete Post</button></a>
+    {% endif %}
+    <div>
+        <h3>Comments:</h3>
+        {% for comment in post.blogpostcomment_set.all %}
+        {% if comment.creator.is_superuser %}
+        <p>{{ comment.creator }}:</p>
+        {% else %}
+        <a href="{% url 'profile details' profile_pk=comment.creator.profile.pk %}">
+            <p>{{ comment.creator }}:</p>
+        </a>
+        {% endif %}
+        <p>{{ comment.text }}</p>
+        {% endfor %}
+    </div>
+    <div style="display: flex; justify-content: center;">
+        <a href="{% url 'blog comment add' post_pk=post.pk %}"><button>Add a comment</button></a>
+    </div>
+</div>
+
+{% endfor %}
+
+{% if object_list %}
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+        <a href="?page=1">&laquo; first</a>
+        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endif %}
+
+{% endblock main_content %}

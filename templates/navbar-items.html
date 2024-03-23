@@ -1,0 +1,83 @@
+{% load static %}
+
+{% if request.user.is_authenticated %}
+<div class="menu-items">
+    <ul>
+        <li><a href="{% url 'blog' %}">Blog</a></li>
+        <li><a href="{% url 'all books' %}">Books</a></li>
+        <li id="genresNavItem">
+            <a href="#">Genres</a>
+            <div class="genres-submenu-wrap" id="genresSubMenu">
+                <div class="genres-submenu">
+                    {% for genre in book_genre %}
+                    <p><a href="{% url 'genre' genre_pk=genre.pk %}?genre={{genre.genre}}">{{ genre.genre }}</a></p>
+                    {% endfor %}
+                </div>
+            </div>
+        </li>
+        <li><a href="{% url 'authors' %}">Authors</a></li>
+        <li><a href="{% url 'search' %}"><img
+                    src="{% static 'images/75-751918_magnifying-glass-clipart-vector-google-search-educ-cartoon.jpg' %}"
+                    alt="" title="Search"></a></li>
+        {% if not request.user.profile.profile_picture %}
+        <li><img src="{% static 'images/profile-circle-icon-2048x2048-cqe5466q.png' %}" alt=""
+                    title="Profile" onclick="toggleProfileMenu()"></li>
+        {% else %}
+        <li><a href="#"><img src="{{ request.user.profile.profile_picture }}" alt=""
+            title="Profile" onclick="toggleProfileMenu()"></a></li>
+        {% endif %}
+    </ul>
+</div>
+
+<div class="profile-submenu-wrap" id="profileSubMenu">
+    <div class="profile-submenu">
+        <div class="user-info">
+            {% if not request.user.is_superuser %}
+            <a href="{% url 'profile details' profile_pk=request.user.pk %}">
+                {% if not request.user.profile.profile_picture %}
+                <img src="{% static 'images/profile-circle-icon-2048x2048-cqe5466q.png' %}" alt="">
+                {% else %}
+                <img src="{{ request.user.profile.profile_picture }}" alt="">
+                {% endif%}
+            </a> 
+            <h3>{{ request.user }}</h3>
+            {% else %}
+                {% if not request.user.profile.profile_picture %}
+                <img src="{% static 'images/profile-circle-icon-2048x2048-cqe5466q.png' %}" alt="">
+                {% else %}
+                <img src="{{ request.user.profile.profile_picture }}" alt="">
+                {% endif%}
+            <h3>{{ request.user }}</h3>
+            {% endif %}
+
+        </div>
+        {% if not request.user.is_superuser %}
+        <a href="{% url 'profile edit' profile_pk=user.pk %}" class="profile-submenu-link">
+            <img src="{% static 'images/edit-editor-pen-pencil-write-icon--4.png' %}" alt="">
+            <p>Edit Profile</p>
+            <span>></span>
+        </a>
+        {% endif %}
+        <a href="{% url 'password change' %}" class="profile-submenu-link">
+            <img src="{% static 'images/password-reset.png' %}"
+                alt="">
+            <p>Password Reset</p>
+            <span>></span>
+        </a>
+        <a href="{% url 'logout' %}" class="profile-submenu-link">
+            <img src="{% static 'images/png-transparent-computer-icons-logout-angle-text-black-thumbnail.png' %}"
+                alt="">
+            <p>Logout</p>
+            <span>></span>
+        </a>
+    </div>
+</div>
+
+{% else %}
+<div class="menu-items">
+    <ul>
+        <li><a href="{% url 'all books' %}">Books</a></li>
+    </ul>
+</div>
+
+{% endif %}

@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/a92226e44366b3ada332bf83a3ffd0a9.ico' %}" type="image/x-icon">
+</head>
+
+<body>
+    <video autoplay loop muted plays-inline src="{% static 'images/production_id 4873467 (2160p).mp4' %}"
+        class="background-video"></video>
+    <nav>
+        <div class="home-page-image">
+            <a href="{% url 'home page' %}"><img
+                    src="{% static 'images/png-clipart-white-and-orange-book-logo-symbol-yellow-orange-logo-ibooks-orange-logo.png' %}"
+                    alt="" title="Home page"></a>
+        </div>
+        {% include 'navbar-items.html' %}
+    </nav>
+    <main>
+        {% block main_content %}
+        {% endblock main_content %}
+    </main>

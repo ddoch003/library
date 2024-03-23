@@ -1,0 +1,25 @@
+{% load static %}
+
+<div class="book-card">
+
+    {% if not book.book_image %}
+    <a href="{% url 'book details' book_pk=book.pk %}?book_title={{book.title}}"><img
+            src="{% static 'images/png-clipart-white-and-orange-book-logo-symbol-yellow-orange-logo-ibooks-orange-logo.png' %}" alt=""></a>
+    {% else %}
+    <a href="{% url 'book details' book_pk=book.pk %}?book_title={{book.title}}"><img src="{{ book.book_image }}" alt=""></a>
+    {% endif %}
+
+    <a href="{% url 'book details' book_pk=book.pk %}?book_title={{book.title}}">
+        <h2>{{ book.title }}</h2>
+    </a>
+
+    {% if book.book_author %}
+    <a href="{% url 'author details' author_pk=book.book_author.pk %}?author_name={{ book.book_author }}">
+        <h3>{{ book.book_author }}</h3>
+    </a>
+    {% else %}
+    <h3>Unknown</h3>
+    {% endif %}
+
+    <p>{{ book.year_published }}</p>
+</div>

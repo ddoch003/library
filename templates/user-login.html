@@ -1,0 +1,26 @@
+{% extends "base_1.html" %}
+{% load static %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block main_content %}
+
+<div class="form-container">
+    <h1>Login</h1>
+
+    <form action="{% url 'login' %}?next={{ next }}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button>Login</button>
+    </form>
+
+    <div>
+        <p><a href="{% url 'password_reset' %}">Forgotten password?</a></p>
+        <p>Not signed up yet? <a href="{% url 'register' %}">Register</a></p>
+    </div>
+</div>
+
+{% endblock main_content %}

@@ -1,0 +1,106 @@
+{% extends "base_2.html" %}
+{% load static %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block navbar_items %}
+{% include "navbar-items.html" %}
+{% endblock navbar_items %}
+
+{% block main_content %}
+<h1>{{ author }}</h1>
+
+<div class="author-details-card-content">
+    <h2>{{ author.life_span }}</h2>
+
+    <div class="author-details-wrapper">
+        <img src="{{ author.author_image }}" alt="">
+
+        <div class="author-description">
+            <p>Nationality: {{ author.nationality }} <br>
+                Gender: {{ author.gender|capfirst }}
+            </p>
+            <p>Bio:</p>
+            {% if author.biography %}
+            <p>
+                {{ author.biography|linebreaks }}
+            </p>
+            {% else %}
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus finibus convallis interdum. Praesent
+                nulla lectus, pretium non justo non, molestie sodales ante. Sed maximus tortor vitae ex sollicitudin
+                pulvinar. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean quis neque rutrum, sodales
+                sapien
+                ac, tempor tellus. Suspendisse aliquet gravida magna, at egestas nibh varius nec. Mauris id magna
+                egestas,
+                cursus justo non, scelerisque leo. Aliquam consectetur hendrerit sem, eget aliquam neque ullamcorper at.
+                Donec suscipit sapien non augue semper, sed condimentum neque porta. Nam sollicitudin turpis vel laoreet
+                laoreet. Donec id scelerisque quam, id molestie est.
+
+                Cras condimentum dignissim urna, id faucibus quam auctor quis. Integer tempor, libero ac congue
+                faucibus,
+                ante turpis rutrum justo, sit amet semper sem odio at libero. Duis congue, velit ut posuere pretium,
+                nibh
+                odio vehicula augue, ac viverra ipsum nulla in est. Vivamus euismod eros et ex scelerisque condimentum.
+                Sed
+                ut lacus vitae ipsum varius vehicula. Nullam sit amet maximus quam, sit amet viverra sapien. Duis
+                suscipit
+                cursus fermentum.
+
+                Aliquam volutpat congue sapien ac venenatis. Nunc vitae commodo mi, et auctor purus. Integer non libero
+                ante. Etiam consequat neque ac iaculis feugiat. Donec vitae fermentum mauris. Duis elit augue, convallis
+                at
+                convallis dictum, bibendum sed metus. Duis pulvinar auctor risus, eget semper felis aliquet in. Aliquam
+                eu
+                mauris et erat sollicitudin laoreet. Phasellus fringilla laoreet dolor ac convallis. Quisque rhoncus nec
+                est
+                ut sollicitudin. Etiam congue orci vel enim malesuada viverra.
+
+                Morbi eget massa in lorem ullamcorper consectetur ut vel lacus. Phasellus sollicitudin diam at
+                scelerisque
+                vehicula. Vestibulum quis interdum arcu, vel scelerisque velit. Praesent non pellentesque turpis, eget
+                sagittis dolor. Maecenas tempor tempus arcu non rutrum. Proin imperdiet, lectus eu gravida feugiat,
+                lorem
+                ipsum consectetur lectus, at vulputate neque justo quis erat. Donec dictum, nulla in accumsan egestas,
+                arcu
+                quam finibus nulla, sed interdum nulla tellus sit amet nisi. Nam molestie facilisis odio, non aliquam
+                augue
+                tincidunt a.
+
+                Vestibulum in velit egestas nibh convallis placerat vestibulum sit amet nisi. Nullam ullamcorper
+                pulvinar
+                felis ultrices pretium. Maecenas maximus sed nisi vel ullamcorper. Duis et commodo lectus, in egestas
+                est.
+                Cras cursus tristique tellus sit amet imperdiet. Quisque tempus metus sit amet orci egestas consectetur.
+                Fusce volutpat eros et ex auctor, vitae eleifend nisi aliquam. Integer congue in est ut efficitur. Nulla
+                sit
+                amet ex sed purus vestibulum auctor. Quisque a nulla eu diam lobortis gravida vulputate nec diam.
+            </p>
+            {% endif %}
+            
+        </div>
+    </div>
+
+</div>
+
+{% if request.user.is_superuser %}
+<div class="details-buttons">
+    <a href="{% url 'author edit' author_pk=author.pk %}"><button>Edit Author</button></a>
+    <a href="{% url 'author delete' author_pk=author.pk %}"><button>Delete Author</button></a>
+</div>
+{% endif %}
+
+<div style="display: flex; align-items: center; justify-content: center;">
+    <h2 style="color: white;
+    text-shadow: 3px 2px 3px rgba(0, 0, 0, 0.68);">Books by {{ author }}</h2>
+</div>
+
+<section class="book-items-container">
+    {% for book in author.book_set.all %}
+    {% include "book-card.html" %}
+    {% endfor %}
+</section>
+
+{% endblock main_content %}

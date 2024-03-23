@@ -1,0 +1,27 @@
+{% extends "base_2.html" %}
+{% load static %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block navbar_items %}
+{% include "navbar-items.html" %}
+{% endblock navbar_items %}
+
+{% block main_content %}
+
+<div class="form-container">
+
+    <h1>Edit post</h1>
+
+    <form action="{% url 'blog edit' post_pk=post.pk %}" method="post">
+
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">Submit</button>
+    </form>
+
+</div>
+{% endblock main_content %}

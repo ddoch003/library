@@ -1,0 +1,12 @@
+{% extends "base_1.html" %}
+{% load static %}
+
+{% block main_content %}
+
+        {% if request.user.is_authenticated %}
+            {% include 'home-page-with-user.html' %}
+        {% else %}
+            {% include 'home-page-no-user.html' %}
+        {% endif %}
+
+{% endblock main_content %}

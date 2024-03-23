@@ -1,0 +1,25 @@
+{% extends "base_1.html" %}
+{% load static %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block main_content %}
+
+<div class="form-container">
+    <h1>Register</h1>
+
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button>Register</button>
+    </form>
+
+    <div>
+        <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+    </div>
+</div>
+
+{% endblock main_content %}
