@@ -1,5 +1,3 @@
-* Copy this content to a notepad file with Word Wrap for a better display
-
 Libraria 20
 
 Project overview:
