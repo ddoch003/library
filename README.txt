@@ -51,7 +51,8 @@ As already mentioned a book instance can be edited only by a superadmin - access
 The book instance can also be deleted by a superadmin and before the post request the admin is redirected to a DeleteView that asks if the user is aware of the fact that this book will be deleted. 
 There is also a link for the author's detail page accessible by clicking on the author's name.
 Books list is accessible withour login. However in order a user to reach the book details the user needs to create a registration and to login.
-A Book instance can be added to the user's favorite books and removed from the list as well - How? - Black magic!
+A Book instance can be added to the user's favorite books and removed from the list as well - How? - Black magic! 
+Just joking. As there is a ManyToMany field favorite_books in the Profile model that establishes the connection between user profiles and book instances there is a form in the book-details.html template that checks if the signed user has added the book to their fav books and displays Add to Favorites/Remove from Favorites button. Then the view AddToFavoriteView and the overriden post method takes care of adding or removing the book to/from the user's fav books.
 
 Author:
 An author instance is also created, updated and deleted only by a superuser. 
