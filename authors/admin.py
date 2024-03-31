@@ -7,4 +7,4 @@ from .models import Author
 class AuthorAdmin(admin.ModelAdmin):
     ordering = ["pk"]
     list_display = ("full_name", "nationality", "gender", "year_born", "year_died")
-    list_filter = ("gender",)
+    list_filter = ("gender", "nationality")
