@@ -7,7 +7,7 @@ from .models import Book, BookGenre
 class BookAdmin(admin.ModelAdmin):
     ordering = ("pk",)
     list_display = ("title", "book_author", "year_published")
-    list_filter = ("genre",)
+    list_filter = ("genre", "book_author")
 
 
 @admin.register(BookGenre)
