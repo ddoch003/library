@@ -1,5 +1,3 @@
-* Copy this content to a notepad file with Word Wrap for a better display
-
 Libraria 20
 
 Project overview:
@@ -39,7 +37,7 @@ Home page:
 Once the user is signed in the home page changes the background and welcomes the user either by username or first name if one. 
 The home page contains a navbar with the most important links of the app. The genre link extends on hover and shows all book genres (a django model). 
 This is achieved by a simple JavaScript. 
-Each genre leads to a page that contains all books associated with a particular genre.
+Each genre leads to a page that contains all books associated with this particular genre.
 The home page also picks up 3 random book instances every time when loaded. Below them there is a link to access the whole library.
 *** If there are no books added yet - no books are displayed. If there are less than three books in the DB - all existing books are shown.
 
@@ -53,7 +51,8 @@ As already mentioned a book instance can be edited only by a superadmin - access
 The book instance can also be deleted by a superadmin and before the post request the admin is redirected to a DeleteView that asks if the user is aware of the fact that this book will be deleted. 
 There is also a link for the author's detail page accessible by clicking on the author's name.
 Books list is accessible withour login. However in order a user to reach the book details the user needs to create a registration and to login.
-A Book instance can be added to the user's favorite books and removed from the list as well - How? - Black magic!
+A Book instance can be added to the user's favorite books and removed from the list as well - How? - Black magic! 
+Just joking. As there is a ManyToMany field favorite_books in the Profile model that establishes the connection between user profiles and book instances there is a form in the book-details.html template that checks if the signed user has added the book to their fav books and displays Add to Favorites/Remove from Favorites button. Then the view AddToFavoriteView and the overriden post method takes care of adding or removing the book to/from the user's fav books.
 
 Author:
 An author instance is also created, updated and deleted only by a superuser. 
@@ -66,4 +65,4 @@ The blog page allows users to add blog posts. A login is requiered in order to a
 Each user can edit and delete thier own blogposts.
 As already mentioned the admins and the staff users can act as blog content reviewers and delete posts and comments.
 Editing and deleting other people's posts is restricted not only by visibility applied in the template but also by UserPassesTestMixin restriction which checks if the signed user is the author of the post and prevents hacking by hitting the url.
-A user can add a comment to a blogpost. Unfortunately the possibility to edit or delete a comment is not available through the app. This can be done only by teh admnins and the staff users over the Django admin portal.
+A user can add a comment to a blogpost. Unfortunately the possibility to edit or delete a comment is not available through the app. The admnins and the staff users can delete inappropriate comments over the Django admin portal.
