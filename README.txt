@@ -66,3 +66,5 @@ Each user can edit and delete thier own blogposts.
 As already mentioned the admins and the staff users can act as blog content reviewers and delete posts and comments.
 Editing and deleting other people's posts is restricted not only by visibility applied in the template but also by UserPassesTestMixin restriction which checks if the signed user is the author of the post and prevents hacking by hitting the url.
 A user can add a comment to a blogpost. Unfortunately the possibility to edit or delete a comment is not available through the app. The admnins and the staff users can delete inappropriate comments over the Django admin portal.
+
+ALA BALA PORTOKALA
