@@ -68,3 +68,4 @@ Editing and deleting other people's posts is restricted not only by visibility a
 A user can add a comment to a blogpost. Unfortunately the possibility to edit or delete a comment is not available through the app. The admnins and the staff users can delete inappropriate comments over the Django admin portal.
 
 ALA BALA PORTOKALA
+TERE MINOS
