@@ -7,7 +7,3 @@ django.setup()
 from django.db.models import Q
 from authors.models import Author
 from books.models import Book
-
-authors = Author.objects.all()
-books = Book.objects.all()
-qs = authors | books
