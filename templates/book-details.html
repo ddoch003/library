@@ -82,7 +82,7 @@
     <form method="post" action="{% url 'add to favorites' %}">
         {% csrf_token %}
         <input type="hidden" name="book_id" value="{{ book.pk }}">
-        <button type="submit">
+        <button type="submit" id="favorites-button">
             {% if book not in request.user.profile.favorite_books.all %}
             Add to favorites
             {% else %}

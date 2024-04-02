@@ -672,6 +672,12 @@ h1 {
     text-shadow: 1px 0px 5px rgba(0, 0, 0, 0.72);
 }
 
+/* Favorites button */
+
+#favorites-button {
+    margin-bottom: 40px;
+}
+
 /* Footer */
 
 footer {
