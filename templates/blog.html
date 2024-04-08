@@ -42,7 +42,9 @@
         <a href="{% url 'blog edit' post_pk=post.pk %}"><button>Edit Post</button></a>
         <a href="{% url 'blog delete' post_pk=post.pk %}"><button>Delete Post</button></a>
     {% elif request.user.is_superuser or request.user.is_staff %}
+        {% if request.user.is_staff and not post.creator.is_superuser %}
         <a href="{% url 'blog delete' post_pk=post.pk %}"><button>Delete Post</button></a>
+        {% endif %}
     {% endif %}
     <div>
         <h3>Comments:</h3>

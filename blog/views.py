@@ -75,6 +75,8 @@ class DeletePostView(PageTitleViewMixin, auth_mixins.UserPassesTestMixin, views.
     
     def test_func(self):
         post = get_object_or_404(BlogPost, pk=self.kwargs["post_pk"])
+        if post.creator.is_superuser and self.request.user.is_staff:
+            return False
         return self.request.user == post.creator or self.request.user.is_superuser or self.request.user.is_staff
 
 
