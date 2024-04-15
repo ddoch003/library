@@ -153,8 +153,11 @@ LOGIN_URL = reverse_lazy("login")
 LOGIN_REDIRECT_URL = reverse_lazy("home page")
 
 # SMTP settings
-mail = os.environ.get("AA_EMAIL_HOST_USER")
-mail_pass = os.environ.get("AA_EMAIL_HOST_PASSWORD")
+# mail = os.environ.get("AA_EMAIL_HOST_USER")
+# mail_pass = os.environ.get("AA_EMAIL_HOST_PASSWORD")
+
+mail = config('EMAIL_USER')
+mail_pass = config('EMAIL_PASS')
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
