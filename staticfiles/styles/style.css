@@ -570,9 +570,8 @@ h1 {
     color: rgb(255, 255, 255);
     text-shadow: 1px 0px 5px rgba(0, 0, 0, 0.72);
     /* text-shadow: 3px 2px 3px rgba(0, 0, 0, 0.68); */
-    font-size: 80px;
+    font-size: 10px;
     margin-bottom: 40px;
-
 }
 
 /* Authenticated user */
