@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 import os
+from decouple import config
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -24,10 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-$64vx(9m0ltum0dg$l_80h(slzp35osk*#ilpr%b=%ay^#mqam"
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', cast=bool, default=True)
 
 ALLOWED_HOSTS = []
 
@@ -88,10 +89,10 @@ WSGI_APPLICATION = "library.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "library_2_db",
-        "USER": "postgres",
-        "PASSWORD": "ChernoMore.1913",
-        "HOST": "127.0.0.1",
+        "NAME": config('DB_NAME'),
+        "USER": config('DB_USER'),
+        "PASSWORD": config('DB_PASSWORD'),
+        "HOST": config('DB_HOST'),
         "PORT": "5432",
     }
 }
